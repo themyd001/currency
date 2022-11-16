@@ -1,28 +1,72 @@
-<div class="calculator padding-tb">
-  <div class="more_details">
-    <div>
-      <p>1 USD equals</p>
-      <h4>430 NGN</h4>
+<div
+  class="calculator padding-tb"
+  *ngIf="ratesData$ | async as ratesData; else loadingBox"
+>
+  <ng-container *ngIf="state$ | async as state">
+    <div class="more_details">
+      <div>
+        <p>1 {{ state.from }} equals</p>
+        <h4>{{ 1 | currencyConverter: state.from:state.to }} {{ state.to }}</h4>
+      </div>
+      <button class="btn">More Details</button>
     </div>
-    <button class="btn">More Details</button>
-  </div>
-  <div class="form_details">
-    <input class="input" type="number" placeholder="Amount" />
-    <div class="selectbox">
-      <select class="select">
-        <option>AED</option>
-      </select>
-      <img src="./assets/swap.png" />
-      <select class="select">
-        <option>AED</option>
-      </select>
-    </div>
-    <input
-      class="output"
-      type="text"
-      placeholder="Value"
-      value="1USD"
-      readonly
-    />
-  </div>
+    <form class="form_details" #form="ngForm">
+      <input
+        class="input"
+        type="number"
+        placeholder="Amount"
+        ngModel
+        name="amount"
+        (keyup)="formChanged(form.value)"
+        [ngModel]="state.amount"
+      />
+      <div class="selectbox">
+        <select
+          class="select"
+          ngModel
+          name="from"
+          [ngModel]="state.from"
+          (ngModelChange)="formChanged(form.value)"
+        >
+          <option
+            *ngFor="let currency of ratesData | keyvalue"
+            [value]="currency.key"
+          >
+            {{ currency.key }}
+          </option>
+        </select>
+        <img src="./assets/swap.png" />
+        <select
+          class="select"
+          ngModel
+          name="to"
+          [ngModel]="state.to"
+          (ngModelChange)="formChanged(form.value)"
+        >
+          <option
+            *ngFor="let currency of ratesData | keyvalue"
+            [value]="currency.key"
+          >
+            {{ currency.key }}
+          </option>
+        </select>
+      </div>
+      <input
+        class="output"
+        type="text"
+        placeholder="Value"
+        [value]="
+          (state.amount | currencyConverter: state.from:state.to) +
+          ' ' +
+          state.to
+        "
+        readonly
+      />
+    </form>
+  </ng-container>
 </div>
+<ng-template #loadingBox>
+  <div class="loading_box">
+    <app-loading [isFinished$]="loadFinished$"></app-loading>
+  </div>
+</ng-template>

@@ -1,7 +1,10 @@
-<div class="card">
+<div class="card" *ngIf="state$ | async as state">
   <div>
-    <p>1 USD equals</p>
-    <h4>430 NGN</h4>
+    <p>{{ state.amount | number }} {{ state.from }} equals</p>
+    <h4>
+      {{ state.amount | currencyConverter: state.from:toCurrency }}
+      {{ toCurrency }}
+    </h4>
   </div>
   <button class="btn">More Details</button>
 </div>

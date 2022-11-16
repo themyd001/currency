@@ -1,14 +1,10 @@
 <div class="home">
-  <app-calculator></app-calculator>
+  <app-calculator [ratesData$]="payld$" [state$]="state$"></app-calculator>
   <div class="boxes padding-tb">
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
+    <app-card
+      *ngFor="let popular of popularCurrencies"
+      [toCurrency]="popular"
+      [state$]="state$"
+    ></app-card>
   </div>
 </div>

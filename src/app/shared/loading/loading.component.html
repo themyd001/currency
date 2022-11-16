@@ -1,0 +1,9 @@
+<ng-container *ngIf="isFinished$ | async as isFinished; else nTemplate">
+  <div class="error_box">
+    <p>{{ isFinished.text }}</p>
+    <button class="btn">Retry</button>
+  </div>
+</ng-container>
+<ng-template #nTemplate>
+  <mat-spinner></mat-spinner>
+</ng-template>

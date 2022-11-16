@@ -8,6 +8,19 @@
   top: 100px;
 }
 
+.loading_box {
+  border-bottom: 1px solid #0000001a;
+  background-color: #fff;
+  display: grid;
+  gap: flex;
+  position: sticky;
+  top: 100px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .more_details,
 .form_details {
   display: flex;
