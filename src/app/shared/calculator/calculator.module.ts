@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { CalculatorComponent } from './calculator.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  declarations: [CalculatorComponent],
+  imports: [CommonModule],
+  exports: [CalculatorComponent],
 })
-export class CalculatorModule { }
+export class CalculatorModule {}

@@ -1,0 +1,53 @@
+.calculator {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  border-bottom: 1px solid #0000001a;
+}
+
+.more_details,
+.form_details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.more_details h4 {
+  font-size: 1.5rem;
+}
+
+.form_details {
+  align-items: flex-end;
+}
+
+.form_details .selectbox {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_details .selectbox img {
+  width: 50px;
+  cursor: pointer;
+}
+
+@media (max-width: 570px) {
+  .calculator {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+  .more_details,
+  .form_details {
+    gap: 0.5rem;
+  }
+}
+@media (max-width: 370px) {
+  .more_details h4 {
+    font-size: 1.1rem;
+  }
+}
