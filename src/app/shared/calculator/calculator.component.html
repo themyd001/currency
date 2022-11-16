@@ -8,7 +8,13 @@
         <p>1 {{ state.from }} equals</p>
         <h4>{{ 1 | currencyConverter: state.from:state.to }} {{ state.to }}</h4>
       </div>
-      <button class="btn">More Details</button>
+      <button
+        class="btn"
+        [routerLink]="['/details', state.from, state.to]"
+        *ngIf="page === 'home'"
+      >
+        More Details
+      </button>
     </div>
     <form class="form_details" #form="ngForm">
       <input
@@ -22,8 +28,8 @@
       />
       <div class="selectbox">
         <select
+          *ngIf="page == 'home'"
           class="select"
-          ngModel
           name="from"
           [ngModel]="state.from"
           (ngModelChange)="formChanged(form.value)"
@@ -35,7 +41,15 @@
             {{ currency.key }}
           </option>
         </select>
-        <img src="./assets/swap.png" />
+        <select
+          *ngIf="page == 'details'"
+          class="select"
+          [ngModel]="state.from"
+          name="from"
+        >
+          <option [value]="state.from">{{ state.from }}</option>
+        </select>
+        <img src="./assets/swap.png" (click)="formChanged(form.value, true)" />
         <select
           class="select"
           ngModel

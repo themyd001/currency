@@ -29,7 +29,9 @@ export class HomeComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.payld$ = this.http.getLatest();
+    this.payld$ = this.state.getPayload()
+      ? this.state.getRates()
+      : this.http.getLatest();
     this.state$ = this.state
       .getState()
       .pipe(startWith(this.state.initialState));

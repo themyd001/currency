@@ -1,5 +1,9 @@
 <div class="home">
-  <app-calculator [ratesData$]="payld$" [state$]="state$"></app-calculator>
+  <app-calculator
+    [ratesData$]="payld$"
+    [state$]="state$"
+    [page]="'home'"
+  ></app-calculator>
   <div class="boxes padding-tb">
     <app-card
       *ngFor="let popular of popularCurrencies"

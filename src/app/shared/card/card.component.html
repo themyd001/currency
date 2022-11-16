@@ -6,5 +6,7 @@
       {{ toCurrency }}
     </h4>
   </div>
-  <button class="btn">More Details</button>
+  <button class="btn" [routerLink]="['/details', state.from, toCurrency]">
+    More Details
+  </button>
 </div>

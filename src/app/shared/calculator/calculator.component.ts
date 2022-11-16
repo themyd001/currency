@@ -18,12 +18,19 @@ import { StateService } from '../../core/services/state.service';
 export class CalculatorComponent implements OnInit {
   @Input() ratesData$!: Observable<Rates | undefined>;
   @Input() state$!: Observable<State>;
+  @Input() page!: string;
 
   loadFinished$!: Observable<{ text: string }>;
 
   constructor(public state: StateService) {}
 
-  formChanged(state: State) {
+  formChanged(state: State, swap?: boolean) {
+    if (swap) {
+      if (this.page !== 'home') {
+        return;
+      }
+      state = { ...state, to: state.from, from: state.to };
+    }
     this.state.setState(state);
   }
 
