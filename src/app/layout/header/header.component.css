@@ -1,10 +1,11 @@
 .header {
   width: 100%;
   height: 100px;
-  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 10%);
+  border-bottom: 1px solid rgb(0 0 0 / 10%);
   position: fixed;
   top: 0;
   left: 0;
+  background-color: #fff;
 }
 
 .header > .container {
@@ -25,4 +26,10 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+}
+
+@media (max-width: 430px) {
+  .btn:nth-of-type(2) {
+    display: none;
+  }
 }

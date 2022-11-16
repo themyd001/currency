@@ -1,0 +1,39 @@
+.card {
+  width: 100%;
+  aspect-ratio: 1 / 0.7;
+  background: linear-gradient(
+    180deg,
+    rgba(2, 17, 132, 0.723) 0%,
+    rgba(67, 37, 166, 0.2) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 0.6rem;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+.card h4 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.card p {
+  text-align: center;
+}
+
+.card button {
+  margin-top: 32px;
+}
+
+@media (max-width: 380px) {
+  .card h4 {
+    font-size: 1.1rem;
+  }
+
+  .card button {
+    margin-top: 16px;
+  }
+}

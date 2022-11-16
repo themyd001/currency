@@ -1,0 +1,11 @@
+.boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .boxes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
