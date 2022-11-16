@@ -2,15 +2,21 @@
   class="calculator padding-tb"
   *ngIf="ratesData$ | async as ratesData; else loadingBox"
 >
-  <ng-container *ngIf="state$ | async as state">
+  <ng-container *ngIf="state$ | async as stateT">
     <div class="more_details">
+      <h4 *ngIf="page === 'home'">Currency Exchanger</h4>
+      <h4 *ngIf="page === 'details'">
+        {{ state.getSymbolName(stateT.from) }}
+      </h4>
       <div>
-        <p>1 {{ state.from }} equals</p>
-        <h4>{{ 1 | currencyConverter: state.from:state.to }} {{ state.to }}</h4>
+        <p>1 {{ stateT.from }} equals</p>
+        <h4>
+          {{ 1 | currencyConverter: stateT.from:stateT.to }} {{ stateT.to }}
+        </h4>
       </div>
       <button
         class="btn"
-        [routerLink]="['/details', state.from, state.to]"
+        [routerLink]="['/details', stateT.from, stateT.to]"
         *ngIf="page === 'home'"
       >
         More Details
@@ -24,14 +30,14 @@
         ngModel
         name="amount"
         (keyup)="formChanged(form.value)"
-        [ngModel]="state.amount"
+        [ngModel]="stateT.amount"
       />
       <div class="selectbox">
         <select
           *ngIf="page == 'home'"
           class="select"
           name="from"
-          [ngModel]="state.from"
+          [ngModel]="stateT.from"
           (ngModelChange)="formChanged(form.value)"
         >
           <option
@@ -44,17 +50,17 @@
         <select
           *ngIf="page == 'details'"
           class="select"
-          [ngModel]="state.from"
+          [ngModel]="stateT.from"
           name="from"
         >
-          <option [value]="state.from">{{ state.from }}</option>
+          <option [value]="stateT.from">{{ stateT.from }}</option>
         </select>
         <img src="./assets/swap.png" (click)="formChanged(form.value, true)" />
         <select
           class="select"
           ngModel
           name="to"
-          [ngModel]="state.to"
+          [ngModel]="stateT.to"
           (ngModelChange)="formChanged(form.value)"
         >
           <option
@@ -70,9 +76,9 @@
         type="text"
         placeholder="Value"
         [value]="
-          (state.amount | currencyConverter: state.from:state.to) +
+          (stateT.amount | currencyConverter: stateT.from:stateT.to) +
           ' ' +
-          state.to
+          stateT.to
         "
         readonly
       />

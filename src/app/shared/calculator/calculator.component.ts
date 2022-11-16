@@ -4,6 +4,7 @@ import {
   Input,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Rates } from 'src/app/core/interface/payload.interface';
 import { State } from 'src/app/core/interface/state.interface';
@@ -22,7 +23,7 @@ export class CalculatorComponent implements OnInit {
 
   loadFinished$!: Observable<{ text: string }>;
 
-  constructor(public state: StateService) {}
+  constructor(public state: StateService, private router: Router) {}
 
   formChanged(state: State, swap?: boolean) {
     if (swap) {
@@ -31,7 +32,11 @@ export class CalculatorComponent implements OnInit {
       }
       state = { ...state, to: state.from, from: state.to };
     }
-    this.state.setState(state);
+    if (this.page === 'home') {
+      this.state.setState(state);
+    } else {
+      this.router.navigate(['/details', state.from, state.to]);
+    }
   }
 
   ngOnInit(): void {
